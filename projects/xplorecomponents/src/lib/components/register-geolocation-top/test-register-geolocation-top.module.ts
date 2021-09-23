@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { CmsConfig, ConfigModule, LanguageService, provideConfig } from "@spartacus/core";
+import { provideConfig } from "@spartacus/core";
 import { translationChunksConfig } from '@spartacus/assets';
 import {
   I18nModule,
@@ -15,14 +15,7 @@ import { TestRegisterGeolocationTopComponent } from "./test-register-geolocation
     imports: [
         CommonModule,
         NgbModule,
-    I18nModule,
-        ConfigModule.withConfig({
-          cmsComponents: {
-            RegisterGeolocationTopComponent: {
-              component: TestRegisterGeolocationTopComponent
-            }
-          }
-        } as CmsConfig),
+        I18nModule,
     ],
     providers: [
       provideConfig({

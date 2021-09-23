@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { CmsConfig, ConfigModule, LanguageService, provideConfig } from "@spartacus/core";
+import { LanguageService, provideConfig } from "@spartacus/core";
 import { TestGeolocationBlockingComponent } from "./test-geolocation-blocking";
 import { translationChunksConfig } from '@spartacus/assets';
 import {
@@ -15,14 +15,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     imports: [
         CommonModule,
         NgbModule,
-    I18nModule,
-        ConfigModule.withConfig({
-          cmsComponents: {
-            GeolocationBlockingComponent: {
-              component: TestGeolocationBlockingComponent
-            }
-          }
-        } as CmsConfig),
+        I18nModule,
     ],
     providers: [
       LanguageService,
