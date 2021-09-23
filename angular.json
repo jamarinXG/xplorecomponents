@@ -1,0 +1,190 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "xplore-components": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "",
+      "sourceRoot": "src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/xplore-components",
+            "index": "src/index.html",
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@spartacus/smartedit/assets",
+                "output": "assets/"
+              }
+            ],
+            "styles": [
+              "src/styles.scss",
+              "src/styles/spartacus/user.scss",
+              "src/styles/spartacus/storefinder.scss",
+              "src/styles/spartacus/product.scss",
+              "src/styles/spartacus/cart.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "xplore-components:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "xplore-components:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "xplore-components:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "tsconfig.spec.json",
+            "karmaConfig": "karma.conf.js",
+            "assets": [
+              "src/favicon.ico",
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "./node_modules/@spartacus/smartedit/assets",
+                "output": "assets/"
+              }
+            ],
+            "styles": [
+              "src/styles.scss",
+              "src/styles/spartacus/user.scss",
+              "src/styles/spartacus/storefinder.scss",
+              "src/styles/spartacus/product.scss",
+              "src/styles/spartacus/cart.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "tsconfig.app.json",
+              "tsconfig.spec.json",
+              "e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "xplore-components:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "xplore-components:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "xplorecomponents": {
+      "projectType": "library",
+      "root": "projects/xplorecomponents",
+      "sourceRoot": "projects/xplorecomponents/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "tsConfig": "projects/xplorecomponents/tsconfig.lib.json",
+            "project": "projects/xplorecomponents/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/xplorecomponents/tsconfig.lib.prod.json"
+            }
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/xplorecomponents/src/test.ts",
+            "tsConfig": "projects/xplorecomponents/tsconfig.spec.json",
+            "karmaConfig": "projects/xplorecomponents/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/xplorecomponents/tsconfig.lib.json",
+              "projects/xplorecomponents/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "xplore-components",
+  "cli": {
+    "analytics": false
+  }
+}
