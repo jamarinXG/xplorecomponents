@@ -1,6 +1,6 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
-import { CmsConfig, LanguageService, provideConfig } from "@spartacus/core";
+import { LanguageService, provideConfig } from "@spartacus/core";
 import { TestGeolocationBlockingComponent } from "./test-geolocation-blocking";
 import { translationChunksConfig } from '@spartacus/assets';
 import {
@@ -20,11 +20,6 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     providers: [
       LanguageService,
       provideConfig({
-        cmsComponents: {
-          GeolocationBlockingComponent: {
-            component: TestGeolocationBlockingComponent
-          }
-        },
         i18n: {
           backend: {
             loadPath: 'assets/i18n-assets/{{lng}}/{{ns}}.json',
@@ -32,7 +27,7 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
           chunks: translationChunksConfig,
           fallbackLang: 'en',
         },
-      } as CmsConfig),
+      }),
     ],
 })
 
