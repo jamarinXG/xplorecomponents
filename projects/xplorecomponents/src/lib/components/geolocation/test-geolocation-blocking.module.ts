@@ -15,11 +15,16 @@ import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
     imports: [
         CommonModule,
         NgbModule,
-        I18nModule,
+        I18nModule
     ],
     providers: [
       LanguageService,
       provideConfig({
+        cmsComponents: {
+          GeolocationBlockingComponent: {
+            component: TestGeolocationBlockingComponent
+          }
+        },
         i18n: {
           backend: {
             loadPath: 'assets/i18n-assets/{{lng}}/{{ns}}.json',
